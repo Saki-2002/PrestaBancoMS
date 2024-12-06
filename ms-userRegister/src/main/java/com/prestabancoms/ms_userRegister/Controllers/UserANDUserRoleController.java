@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/userregister")
 @CrossOrigin("*")
 public class UserANDUserRoleController {
 
@@ -23,7 +23,7 @@ public class UserANDUserRoleController {
     UserService userService;
     UserRoleService userRoleService;
 
-    @PostMapping("/register")
+    @PostMapping("/register/")
     public ResponseEntity<?> register (@RequestBody Map<String, Object> requestData){
         String name = requestData.get("name").toString();
         String password1 = requestData.get("password1").toString();
@@ -41,7 +41,7 @@ public class UserANDUserRoleController {
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login/")
     public ResponseEntity<?> loginUser(@RequestBody Map<String, Object> requestData){
         String name = requestData.get("name").toString();
         String password = requestData.get("password").toString();
@@ -53,7 +53,7 @@ public class UserANDUserRoleController {
         }
     }
 
-    @GetMapping("/roles/getAll")
+    @GetMapping("/roles/getAll/")
     public ResponseEntity<List<UserRoleEntity>> getAll() {
         List<UserRoleEntity> userRoleEntities = userRoleService.getAll();
         return ResponseEntity.ok(userRoleEntities);
