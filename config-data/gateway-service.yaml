@@ -1,0 +1,49 @@
+server:
+  port: 8080
+  
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowedMethods: '*'
+            allowedHeaders: '*'
+      routes:
+        - id: ms-MCSimulation
+          uri: lb://ms-MCSimulation:8081
+          predicates:
+            - Path=/mcsimulation/**
+        - id: ms-userRegister
+          uri: lb://ms-userRegister:8082
+          predicates:
+            - Path=/userregister/**
+        - id: ms-MCApplication
+          uri: lb://ms-MCApplication:8083
+          predicates:
+            - Path=/mcapplication/**
+        - id: ms-MCEvaluation
+          uri: lb://ms-MCEvaluation:8084
+          predicates:
+            - Path=/mcevaluation/**
+        - id: ms-MCTracking
+          uri: lb://ms-MCTracking:8085
+          predicates:
+            - Path=/mctracking/**
+        - id: ms-totalCosts
+          uri: lb://ms-totalCosts:8086
+          predicates:
+            - Path=/totalcosts/**

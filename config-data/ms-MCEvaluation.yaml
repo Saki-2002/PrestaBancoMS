@@ -1,0 +1,15 @@
+server:
+  port: 8084
+spring:
+  datasource:
+    uri: jdbc:postgresql://localhost:5432/pbms-mcevaluation
+    username: postgres
+    password: admin
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
