@@ -2,7 +2,7 @@ server:
   port: 8085
 spring:
   datasource:
-    uri: jdbc:postgresql://localhost:5432/pbms-mctracking
+    url: jdbc:postgresql://localhost:5432/pbms-mctracking
     username: postgres
     password: admin
 eureka:

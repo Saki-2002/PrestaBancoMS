@@ -21,6 +21,7 @@ public class UserANDUserRoleController {
 
     @Autowired
     UserService userService;
+    @Autowired
     UserRoleService userRoleService;
 
     @PostMapping("/register/")
