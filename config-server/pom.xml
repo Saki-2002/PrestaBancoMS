@@ -8,7 +8,7 @@
 		<version>3.3.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.prestabancoms</groupId>
+	<groupId>com.pre3.1.5stabancoms</groupId>
 	<artifactId>config-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>config-server</name>
@@ -28,7 +28,6 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
-		<spring-cloud.version>2023.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -47,7 +46,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
+				<version>2023.0.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
