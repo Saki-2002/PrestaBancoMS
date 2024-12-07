@@ -16,10 +16,10 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long id;
+    private int id;
 
     private String name;
     private String password;
-    private long role;
+    private int role;
 
 }

@@ -16,6 +16,9 @@ public class MsMcApplicationService {
         return mcApplicationRepository.save(mcApplicationEntity);
     }
 
+    public MsMcApplicationEntity findById(long id){
+        return mcApplicationRepository.findById(id);
+    }
 
 
 }

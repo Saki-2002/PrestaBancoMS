@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/mcapplication")
 @CrossOrigin("*")
 
-public class MsMcApplicationController {
+public class MsMcApplicationANDMsMcTypesController {
 
     @Autowired
     private MsMcApplicationService msMcApplicationService;
@@ -33,5 +33,16 @@ public class MsMcApplicationController {
         return ResponseEntity.ok(mcTypesEntities);
     }
 
+    @PutMapping("/{applicationId}/")
+    public ResponseEntity<?> updateApplicationStatus(@PathVariable Long applicationId, @RequestBody MsMcApplicationEntity updatedApplication) {
+        MsMcApplicationEntity existingApplication = msMcApplicationService.findById(applicationId);
+        if(existingApplication != null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        existingApplication.setStatus(updatedApplication.getStatus());
+        MsMcApplicationEntity savedApplication = msMcApplicationService.saveMCApplication(existingApplication);
+        return ResponseEntity.ok(savedApplication);
+    }
 
 }
