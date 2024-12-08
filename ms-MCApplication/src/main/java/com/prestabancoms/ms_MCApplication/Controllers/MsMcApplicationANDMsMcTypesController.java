@@ -26,8 +26,14 @@ public class MsMcApplicationANDMsMcTypesController {
         return ResponseEntity.ok(savedApplication);
     }
 
+    @GetMapping("/getAll/")
+    public ResponseEntity<List<MsMcApplicationEntity>> getAll() {
+        List<MsMcApplicationEntity> mcapplications = msMcApplicationService.getAll();
+        return ResponseEntity.ok(mcapplications);
+    }
+
     @GetMapping("/types/getAll/")
-    public ResponseEntity<List<MsMcTypesEntity>> getAll() {
+    public ResponseEntity<List<MsMcTypesEntity>> getAllTypes() {
         List<MsMcTypesEntity> mcTypesEntities = msMcTypesService.getAll();
         return ResponseEntity.ok(mcTypesEntities);
     }

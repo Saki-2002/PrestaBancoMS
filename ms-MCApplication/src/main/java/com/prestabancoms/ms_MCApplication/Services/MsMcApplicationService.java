@@ -13,6 +13,10 @@ public class MsMcApplicationService {
     @Autowired
     private MsMcApplicationRepository mcApplicationRepository;
 
+    public List<MsMcApplicationEntity> getAll(){
+        return mcApplicationRepository.findAll();
+    }
+
     public MsMcApplicationEntity saveMCApplication(MsMcApplicationEntity mcApplicationEntity) {
         return mcApplicationRepository.save(mcApplicationEntity);
     }

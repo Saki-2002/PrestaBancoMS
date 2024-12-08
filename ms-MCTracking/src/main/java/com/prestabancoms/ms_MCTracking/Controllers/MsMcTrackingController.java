@@ -36,7 +36,7 @@ public class MsMcTrackingController {
         return ResponseEntity.ok(applications);
     }
 
-    @PutMapping("/{applicationId}")
+    @PutMapping("/updateStatus/{applicationId}")
     public ResponseEntity<?> updateApplicationStatus(@PathVariable Long applicationId, @RequestBody Long statusId){
         MsMcApplication mcApplication = msMcTrackingService.updateApplicationStatusbyId(applicationId, statusId);
         return ResponseEntity.ok(mcApplication);
