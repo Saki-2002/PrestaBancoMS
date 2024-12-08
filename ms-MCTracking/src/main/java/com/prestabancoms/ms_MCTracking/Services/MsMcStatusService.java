@@ -1,4 +1,4 @@
-package com.prestabancoms.ms_MCTracking.Service;
+package com.prestabancoms.ms_MCTracking.Services;
 
 import com.prestabancoms.ms_MCTracking.Entities.MsMcStatusEntity;
 import com.prestabancoms.ms_MCTracking.Repositories.MsMcStatusRepository;
@@ -7,6 +7,9 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 
 public class MsMcStatusService {
@@ -14,6 +17,10 @@ public class MsMcStatusService {
 
     @Autowired
     MsMcStatusRepository mcStatusRepository;
+
+    public List<MsMcStatusEntity> getAll() {
+        return new ArrayList<>(mcStatusRepository.findAll());
+    }
 
     @PostConstruct
     public void init() {

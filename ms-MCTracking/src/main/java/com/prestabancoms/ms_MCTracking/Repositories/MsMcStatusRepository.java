@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface MsMcStatusRepository extends JpaRepository<MsMcStatusEntity, Integer> {
+public interface MsMcStatusRepository extends JpaRepository<MsMcStatusEntity, Long> {
 
     MsMcStatusEntity findByStatus(String status);
 

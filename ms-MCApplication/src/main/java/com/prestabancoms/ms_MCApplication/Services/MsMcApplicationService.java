@@ -5,6 +5,7 @@ import com.prestabancoms.ms_MCApplication.Repositories.MsMcApplicationRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 public class MsMcApplicationService {
@@ -16,8 +17,12 @@ public class MsMcApplicationService {
         return mcApplicationRepository.save(mcApplicationEntity);
     }
 
-    public MsMcApplicationEntity findById(long id){
-        return mcApplicationRepository.findById(id);
+    public MsMcApplicationEntity findById(Long id){
+        return mcApplicationRepository.findById(id).orElse(null);
+    }
+
+    public List<MsMcApplicationEntity> findAllbyClient(Long Id){
+        return mcApplicationRepository.findAllByClient(Id);
     }
 
 

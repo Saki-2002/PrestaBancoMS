@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 public class MsMcApplication {
 
 
-    private int status;
-    private int type;
-    private int client;
-    private int executive;
+    private Long status;
+    private Long type;
+    private Long client;
+    private Long executive;
 
     private int loanAmount; //En CLP
     private int loanTerm; //En años

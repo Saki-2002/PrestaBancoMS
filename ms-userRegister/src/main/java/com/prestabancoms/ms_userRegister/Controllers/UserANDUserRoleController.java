@@ -15,7 +15,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/userregister")
-@CrossOrigin("*")
 public class UserANDUserRoleController {
 
 

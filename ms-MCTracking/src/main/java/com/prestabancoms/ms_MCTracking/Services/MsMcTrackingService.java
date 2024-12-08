@@ -1,19 +1,26 @@
-package com.prestabancoms.ms_MCEvaluation.Services;
+package com.prestabancoms.ms_MCTracking.Services;
 
-import com.prestabancoms.ms_MCEvaluation.Models.MsMcTypesEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import com.prestabancoms.ms_MCTracking.Models.MsMcApplication;
 import org.springframework.web.client.RestTemplate;
-import com.prestabancoms.ms_MCEvaluation.Models.MsMcApplication;
-import org.springframework.http.HttpEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-public class MsMcEvaluationService {
+public class MsMcTrackingService {
 
     @Autowired
     RestTemplate restTemplate;
+
+    public List<MsMcApplication> getAllbyClient(Long clientId) {
+        List<MsMcApplication> mcapplications = restTemplate.getForObject("http://ms-MCApplication/mcapplication/getAllbyClient/" + clientId, List.class);
+        return mcapplications;
+    }
 
     public MsMcApplication updateApplicationStatusbyId(Long applicationId, Long statusId) {
 

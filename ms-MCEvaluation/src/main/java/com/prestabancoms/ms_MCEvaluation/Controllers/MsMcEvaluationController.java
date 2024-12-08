@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/mcevaluation")
-@CrossOrigin("*")
 public class MsMcEvaluationController {
 
     @Autowired
     MsMcEvaluationService msMcEvaluationService;
 
-    @PutMapping("/{applicationId/}")
+    @PutMapping("/{applicationId}")
     public ResponseEntity<?> updateApplicationStatus(@PathVariable Long applicationId, @RequestBody Long statusId){
         MsMcApplication mcApplication = msMcEvaluationService.updateApplicationStatusbyId(applicationId, statusId);
         return ResponseEntity.ok(mcApplication);

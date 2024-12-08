@@ -5,7 +5,7 @@ import com.prestabancoms.ms_userRegister.Entities.UserRoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-public interface UserRoleRepository extends JpaRepository<UserRoleEntity, Integer> {
+public interface UserRoleRepository extends JpaRepository<UserRoleEntity, Long> {
 
     UserRoleEntity findByRole(String role);
 

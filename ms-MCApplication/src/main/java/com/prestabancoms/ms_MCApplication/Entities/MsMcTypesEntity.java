@@ -16,7 +16,7 @@ public class MsMcTypesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private int id;
+    private Long id;
 
     private String type;//1ra vivienda/2da/propiedades comerciales/remodelación
     private int max_term; //En años

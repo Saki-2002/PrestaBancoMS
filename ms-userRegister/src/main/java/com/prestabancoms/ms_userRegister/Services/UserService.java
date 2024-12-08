@@ -21,7 +21,7 @@ public class UserService {
     public UserEntity register(String name, String password, String role){
         if(userRepository.findByName(name)==null){
             UserRoleEntity userRoleEntity = userRoleRepository.findByRole(role);
-            long roleID = userRoleEntity.getId();
+            Long roleID = userRoleEntity.getId();
             UserEntity user = new UserEntity(null, name, password,roleID);
             return userRepository.save(user);
         } else {

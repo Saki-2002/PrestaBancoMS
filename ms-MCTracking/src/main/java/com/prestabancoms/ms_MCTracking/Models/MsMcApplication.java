@@ -1,25 +1,15 @@
-package com.prestabancoms.ms_MCApplication.Entities;
+package com.prestabancoms.ms_MCTracking.Models;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@Entity
-@Table (name = "mc_application")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
+public class MsMcApplication {
 
-public class MsMcApplicationEntity {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long id;
 
     private Long status;
     private Long type;
@@ -32,4 +22,5 @@ public class MsMcApplicationEntity {
     private double lienInsurance; // En %
     private double fireInsurance; //En CLP
     private double administrationCommission; //En %
+
 }

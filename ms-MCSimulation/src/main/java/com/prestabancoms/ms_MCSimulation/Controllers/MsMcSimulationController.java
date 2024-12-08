@@ -10,7 +10,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/mcsimulation")
-@CrossOrigin("*")
 public class MsMcSimulationController {
 
     @Autowired

@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/mcapplication")
-@CrossOrigin("*")
 
 public class MsMcApplicationANDMsMcTypesController {
 
@@ -33,10 +32,16 @@ public class MsMcApplicationANDMsMcTypesController {
         return ResponseEntity.ok(mcTypesEntities);
     }
 
-    @PutMapping("/{applicationId}/")
+    @GetMapping("/getAllbyClient/{clientId}")
+    public ResponseEntity<List<MsMcApplicationEntity>> getAllByClient(@PathVariable Long clientId) {
+        List<MsMcApplicationEntity> mcapplications = msMcApplicationService.findAllbyClient(clientId);
+        return ResponseEntity.ok(mcapplications);
+    }
+
+    @PutMapping("/status/update/{applicationId}")
     public ResponseEntity<?> updateApplicationStatus(@PathVariable Long applicationId, @RequestBody MsMcApplicationEntity updatedApplication) {
         MsMcApplicationEntity existingApplication = msMcApplicationService.findById(applicationId);
-        if(existingApplication != null) {
+        if(existingApplication == null) {
             return ResponseEntity.notFound().build();
         }
 
