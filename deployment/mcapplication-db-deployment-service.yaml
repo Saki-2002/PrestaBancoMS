@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mcapplication-db-pv
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/mcapplication-db-data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mcapplication-db-pvc
+  labels:
+    app: postgres
+    tier: database
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcapplication-db-deployment
+  labels:
+    app: mcapplication-db-deployment
+    tier: database
+spec:
+  selector:
+    matchLabels:
+      app: mcapplication-db-deployment
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mcapplication-db-deployment
+        tier: database
+    spec:
+      containers:
+        - name: mcapplication-db
+          image: postgres
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_USER_MCAPPLICATION
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_PASSWORD_MCAPPLICATION
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: mcapplication-db-data
+      volumes:
+        - name: mcapplication-db-data
+          persistentVolumeClaim:
+            claimName: mcapplication-db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcapplication-db-service
+  labels:
+    app: mcapplication-db-service
+    tier: database
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+  selector:
+    app: mcapplication-db-deployment
+    tier: database
+  type: LoadBalancer

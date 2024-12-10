@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-mctracking-deployment
+  labels:
+    app: ms-mctracking-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ms-mctracking-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ms-mctracking-deployment
+    spec:
+      containers:
+        - name: ms-mctracking
+          image: saki2002/ms-mctracking
+          ports:
+            - containerPort: 8085
+          env:
+            - name: SERVER_PORT
+              value: "0"
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_HOST_MCTRACKING
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_PORT_MCTRACKING
+            - name: DB_DBNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_DBNAME_MCTRACKING
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_USER_MCTRACKING
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_PASSWORD_MCTRACKING
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-mctracking-service
+  labels:
+    app: ms-mctracking-service
+spec:
+  selector:
+    app: ms-mctracking-deployment
+  ports:
+    - protocol: TCP
+      port: 8085
+      targetPort: 8085
+  type: LoadBalancer

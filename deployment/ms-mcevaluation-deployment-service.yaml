@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-mcevaluation-deployment
+  labels:
+    app: ms-mcevaluation-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ms-mcevaluation-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ms-mcevaluation-deployment
+    spec:
+      containers:
+        - name: ms-mcevaluation
+          image: saki2002/ms-mcevaluation
+          ports:
+            - containerPort: 8084
+          env:
+            - name: SERVER_PORT
+              value: "0"
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_HOST_MCEVALUATION
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_PORT_MCEVALUATION
+            - name: DB_DBNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_DBNAME_MCEVALUATION
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_USER_MCEVALUATION
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_PASSWORD_MCEVALUATION
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-mcevaluation-service
+  labels:
+    app: ms-mcevaluation-service
+spec:
+  selector:
+    app: ms-mcevaluation-deployment
+  ports:
+    - protocol: TCP
+      port: 8084
+      targetPort: 8084
+  type: LoadBalancer

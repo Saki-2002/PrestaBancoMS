@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-totalcosts-deployment
+  labels:
+    app: ms-totalcosts-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ms-totalcosts-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ms-totalcosts-deployment
+    spec:
+      containers:
+        - name: ms-totalcosts
+          image: saki2002/ms-totalcosts
+          ports:
+            - containerPort: 8086
+          env:
+            - name: SERVER_PORT
+              value: "0"
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_HOST_TOTALCOSTS
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_PORT_TOTALCOSTS
+            - name: DB_DBNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_DBNAME_TOTALCOSTS
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_USER_TOTALCOSTS
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: DB_PASSWORD_TOTALCOSTS
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-totalcosts-service
+  labels:
+    app: ms-totalcosts-service
+spec:
+  selector:
+    app: ms-totalcosts-deployment
+  ports:
+    - protocol: TCP
+      port: 8086
+      targetPort: 8086
+  type: LoadBalancer

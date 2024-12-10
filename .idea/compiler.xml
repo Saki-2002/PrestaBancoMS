@@ -8,13 +8,21 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
-        <module name="ms-MCEvaluation" />
         <module name="ms-MCSimulation" />
-        <module name="ms-userRegister" />
         <module name="gateway-server" />
-        <module name="ms-MCTracking" />
         <module name="ms-totalCosts" />
         <module name="eureka-server" />
+      </profile>
+      <profile name="Annotation profile for ms-userRegister" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="ms-userRegister" />
+        <module name="ms-MCTracking" />
+        <module name="ms-MCEvaluation" />
         <module name="ms-MCApplication" />
       </profile>
     </annotationProcessing>
