@@ -22,6 +22,8 @@ spec:
           env:
             - name: SERVER_PORT
               value: "0"
+            - name: CONFIG_SERVER_URI
+              value: http://config-server-service:8888
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
