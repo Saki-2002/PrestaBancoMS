@@ -22,26 +22,26 @@ spring:
             allowedHeaders: '*'
       routes:
         - id: ms-MCSimulation
-          uri: lb://ms-MCSimulation:8081
+          uri: lb://ms-MCSimulation
           predicates:
             - Path=/mcsimulation/**
         - id: ms-userRegister
-          uri: lb://ms-userRegister:8082
+          uri: lb://ms-userRegister
           predicates:
             - Path=/userregister/**
         - id: ms-MCApplication
-          uri: lb://ms-MCApplication:8083
+          uri: lb://ms-MCApplication
           predicates:
             - Path=/mcapplication/**
         - id: ms-MCEvaluation
-          uri: lb://ms-MCEvaluation:8084
+          uri: lb://ms-MCEvaluation
           predicates:
             - Path=/mcevaluation/**
         - id: ms-MCTracking
-          uri: lb://ms-MCTracking:8085
+          uri: lb://ms-MCTracking
           predicates:
             - Path=/mctracking/**
         - id: ms-totalCosts
-          uri: lb://ms-totalCosts:8086
+          uri: lb://ms-totalCosts
           predicates:
             - Path=/totalcosts/**
