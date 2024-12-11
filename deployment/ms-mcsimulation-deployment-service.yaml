@@ -49,18 +49,3 @@ spec:
                 secretKeyRef:
                   name: postgres-credentials
                   key: DB_PASSWORD_MCSIMULATION
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ms-mcsimulation-service
-  labels:
-    app: ms-mcsimulation-service
-spec:
-  selector:
-    app: ms-mcsimulation-deployment
-  ports:
-    - protocol: TCP
-      port: 8081
-      targetPort: 8081
-  type: LoadBalancer

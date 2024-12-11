@@ -49,18 +49,3 @@ spec:
                 secretKeyRef:
                   name: postgres-credentials
                   key: DB_PASSWORD_MCAPPLICATION
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ms-mcapplication-service
-  labels:
-    app: ms-mcapplication-service
-spec:
-  selector:
-    app: ms-mcapplication-deployment
-  ports:
-    - protocol: TCP
-      port: 8083
-      targetPort: 8083
-  type: LoadBalancer

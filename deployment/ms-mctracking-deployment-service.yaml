@@ -49,18 +49,3 @@ spec:
                 secretKeyRef:
                   name: postgres-credentials
                   key: DB_PASSWORD_MCTRACKING
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ms-mctracking-service
-  labels:
-    app: ms-mctracking-service
-spec:
-  selector:
-    app: ms-mctracking-deployment
-  ports:
-    - protocol: TCP
-      port: 8085
-      targetPort: 8085
-  type: LoadBalancer
